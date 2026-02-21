@@ -101,7 +101,7 @@ def chunk_text(text: str, file_name: str) -> List[Document]:
     )
     chunks = splitter.create_documents(
         [text],
-        metadatas=[{"source": file_name, "chunk_id": i} for i in range(100000)],
+        metadatas=[{"source": file_name, "chunk_id": 0}],
     )
     # Fix chunk_id after splitting
     for i, chunk in enumerate(chunks):

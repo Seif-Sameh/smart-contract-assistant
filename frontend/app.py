@@ -52,9 +52,12 @@ def upload_document(file, reset_store):
     if file is None:
         return "⚠️ Please select a file to upload.", ""
 
-    with open(file.name, "rb") as f:
+    # Handle both Gradio 4.x (str path) and older (NamedString) formats
+    file_path = file if isinstance(file, str) else file.name
+
+    with open(file_path, "rb") as f:
         file_content = f.read()
-    file_name = Path(file.name).name
+    file_name = Path(file_path).name
     content_type = "application/pdf" if file_name.endswith(".pdf") else \
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 
